@@ -4,7 +4,8 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "dev": "NODE_ENV=development webpack-dev-server --color --progress --hot"
+    "dev:win": "cross-env NODE_ENV=development webpack-dev-server --color --progress --hot",
+    "dev:mac": "NODE_ENV=development webpack-dev-server --color --progress --hot"
   },
   "browserslist": [
     "last 2 version",
@@ -24,6 +25,7 @@
     "autoprefixer": "^9.4.7",
     "babel-core": "^7.0.0-bridge.0",
     "babel-loader": "^8.0.5",
+    "cross-env": "^5.2.0",
     "css-loader": "^2.1.0",
     "node-sass": "^4.11.0",
     "postcss-loader": "^3.0.0",
