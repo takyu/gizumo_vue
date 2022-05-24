@@ -27,6 +27,7 @@ const config = {
     port: 8080,
     watchContentBase: true,
     contentBase: path.join(__dirname, 'public'),
+    open: 'Google Chrome'
   },
   entry: {
     index: [
