@@ -1,37 +1,35 @@
 <template>
   <div>
-    <!-- <h1>{{ message }}</h1> -->
-    <!-- <h1 v-html="message" v-bind:class="{ 'is-green': isGreen }"></h1> -->
-    <!-- <h1 v-html="message" v-bind:class="classObject"></h1> -->
-    <h1 v-html="message" :class="classObject"></h1>
+    <h1>-- slot --</h1>
+    <!-- <child-component v-show="isShow"></child-component> -->
     <hr />
-    <child-component v-show="isShow"></child-component>
-    <hr />
-    <!-- <p v-if="id === 1">1</p>
-    <p v-else-if="id === 2">2</p>
-    <p v-else>other</p> -->
-    <template v-if="id === 1">
-      <p>1-1</p>
-      <p>1-2</p>
-      <p>1-3</p>
-    </template>
-    <template v-else-if="id === 2">
-      <p>2-1</p>
-      <p>2-2</p>
-      <p>2-3</p>
-    </template>
-    <hr />
-    <template v-for="item in items">
-      <li :key="item.id">{{ item.id }} - {{ item.title }}</li>
-    </template>
-    <hr />
-    <template v-for="item in items">
-      <child-component :key="item.id"></child-component>
-    </template>
-    <hr />
-    <!-- <button v-on:click="count++">Add to Count</button> -->
-    <button @click="count++">Add to Count</button>
-    <p>{{ count }}回クリックしました。</p>
+    <child-component v-show="isShow">
+      <!-- <template v-slot:head>
+        <p>head slot</p>
+      </template>
+      <template v-slot:default>
+        <p>main slot</p>
+        <p>main slot2</p>
+      </template>
+      <template v-slot:foot>
+        <p>foot slot</p>
+      </template> -->
+      <template #head>
+        <p>head slot</p>
+      </template>
+      <template #default>
+        <p>main slot</p>
+        <p>main slot2</p>
+      </template>
+      <template #foot>
+        <p>foot slot</p>
+      </template>
+    </child-component>
+    <!-- <template v-for="item in items">
+      <child-component :key="item.id">
+        <span>slot content</span>
+      </child-component>
+    </template> -->
   </div>
 </template>
 
