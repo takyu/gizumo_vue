@@ -1,35 +1,9 @@
 <template>
   <div>
-    <h1>-- slot --</h1>
-    <!-- <child-component v-show="isShow"></child-component> -->
+    <h1>-- methods --</h1>
     <hr />
-    <child-component v-show="isShow">
-      <!-- <template v-slot:head>
-        <p>head slot</p>
-      </template>
-      <template v-slot:default>
-        <p>main slot</p>
-        <p>main slot2</p>
-      </template>
-      <template v-slot:foot>
-        <p>foot slot</p>
-      </template> -->
-      <template #head>
-        <p>head slot</p>
-      </template>
-      <template #default>
-        <p>main slot</p>
-        <p>main slot2</p>
-      </template>
-      <template #foot>
-        <p>foot slot</p>
-      </template>
-    </child-component>
-    <!-- <template v-for="item in items">
-      <child-component :key="item.id">
-        <span>slot content</span>
-      </child-component>
-    </template> -->
+    <button @click="incrementCount">Add to count</button>
+    <p>{{ count }}回クリックされました</p>
   </div>
 </template>
 
@@ -62,6 +36,11 @@ export default {
       ],
       count: 0,
     };
+  },
+  methods: {
+    incrementCount() {
+      this.count++;
+    },
   },
   components: {
     ChildComponent,
