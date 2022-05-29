@@ -1,18 +1,14 @@
 <template>
   <div>
     <h1 v-html="message" :class="classObject"></h1>
-    <p>{{ description }}</p>
-    <button @click="addDescription">add description</button>
-    <hr />
-    <template v-for="category in categories">
-      <p :key="category">
-        {{ category }}
-      </p>
-    </template>
-    <hr />
-    <button @click="updateText">update text</button>
-    <hr />
     <button @click="changeTextSize">large</button>
+    <hr />
+    <input type="text" v-model="inputText" />
+    <p>computed: {{ getUpperCaseText }}</p>
+    <p>methods: {{ showUpperCaseText() }}</p>
+    <hr />
+    <button @click="addDescription">add description</button>
+    <p>{{ leads.description }}</p>
   </div>
 </template>
 
@@ -26,45 +22,48 @@
         classObject: {
           'is-large': false,
         },
-        description: '',
-        items: [
-          {
-            id: this.$uuid.v4(),
-            title: '1番目のリスト',
-          },
-          {
-            id: this.$uuid.v4(),
-            title: '２番目のリスト',
-          },
-          {
-            id: this.$uuid.v4(),
-            title: '3番目のリスト',
-          },
-        ],
-        categories: ['Javascript', 'jQuery'],
+        inputText: '',
+        leads: {
+          message: '<span>Hello Vue</span>',
+          description: '',
+        },
       };
     },
     methods: {
-      addDescription() {
-        this.description = 'Vue-lesson';
-        console.log(this);
-        console.log(this.description);
-      },
-      updateText() {
-        // this.categories.splice(1, 1, 'Vue.js');
-        // this.$set(this.categories, 1, 'Vue.js');
-        // this.categories.splice(2, 1, 'Vue.js');
-        this.$set(this.categories, 2, 'Vue.js');
+      showUpperCaseText() {
+        return this.inputText.toUpperCase();
       },
       changeTextSize() {
-        // this.classObject = Object.assign({}, this.classObject, {
-        //   'is-large': true,
-        // });
-        // this.classObject = { ...this.classObject, 'is-large': true };
-        this.$set(this.classObject, 'is-large', true);
+        this.classObject = { ...this.classObject, 'is-large': true };
+      },
+      addDescription() {
+        this.leads.description = 'Vue-lesson';
       },
     },
-    computed: {},
+    computed: {
+      getUpperCaseText() {
+        return this.inputText.toUpperCase();
+      },
+    },
+    watch: {
+      inputText: (value, oldValue) => {
+        console.log(`value -> ${value}`);
+        console.log(`oldValue -> ${oldValue}`);
+      },
+      leads: {
+        handler() {
+          console.log('add description');
+        },
+        deep: true,
+      },
+      // leads.descriptionの変更のみを監視したい場合
+      // 'leads.description': {
+      //   handler() {
+      //     console.log('add description');
+      //   },
+      //   deep: true,
+      // },
+    },
     components: {
       ChildComponent,
     },
