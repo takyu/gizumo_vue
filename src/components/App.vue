@@ -1,16 +1,20 @@
 <template>
   <div>
-    <template v-for="item in items">
-      <!-- Vue.js 3.x. -->
-      <!-- https://eslint.vuejs.org/rules/no-v-for-template-key-on-child.html -->
-      <!-- Vue.js 2.x -->
-      <!-- https://eslint.vuejs.org/rules/no-v-for-template-key.html -->
-      <!-- Vue 3.x では、:key は、template 側に、 -->
-      <!-- Vue 2.x では、:key は、child-component 側に書く -->
-      <child-component :title="item.title" :key="item.id">
-        <span>slot content</span>
-      </child-component>
+    <h1 v-html="message" :class="classObject"></h1>
+    <p>{{ description }}</p>
+    <button @click="addDescription">
+      add description
+    </button>
+    <hr />
+    <template v-for="category in categories">
+      <p :key="$uuid.v4()">
+        {{ category }}
+      </p>
     </template>
+    <hr />
+    <button @click="updateText">update text</button>
+    <hr />
+    <button @click="changeTextSize">large</button>
   </div>
 </template>
 
@@ -20,6 +24,11 @@ export default {
   //es6のメソッド記法
   data() {
     return {
+      message: '-- data --',
+      classObject: {
+        'is-large': false,
+      },
+      description: '',
       items: [
         {
           id: this.$uuid.v4(),
@@ -27,16 +36,36 @@ export default {
         },
         {
           id: this.$uuid.v4(),
-          title: '2番目のリスト',
+          title: '２番目のリスト',
         },
         {
           id: this.$uuid.v4(),
           title: '3番目のリスト',
         },
       ],
+      categories: ['Javascript', 'jQuery'],
     };
   },
-  methods: {},
+  methods: {
+    addDescription() {
+      this.description = 'Vue-lesson';
+      console.log(this);
+      console.log(this.description);
+    },
+    updateText() {
+      // this.categories.splice(1, 1, 'Vue.js');
+      // this.$set(this.categories, 1, 'Vue.js');
+      // this.categories.splice(2, 1, 'Vue.js');
+      this.$set(this.categories, 2, 'Vue.js');
+    },
+    changeTextSize() {
+      // this.classObject = Object.assign({}, this.classObject, {
+      //   'is-large': true,
+      // });
+      // this.classObject = { ...this.classObject, 'is-large': true };
+      this.$set(this.classObject, 'is-large', true);
+    },
+  },
   computed: {},
   components: {
     ChildComponent,
@@ -55,5 +84,9 @@ hr {
 
 .is-green {
   color: green;
+}
+
+.is-large {
+  font-size: 60px;
 }
 </style>
