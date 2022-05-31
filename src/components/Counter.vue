@@ -6,14 +6,31 @@
 </template>
 
 <script>
+  import { mapState, mapActions } from 'vuex';
+
   export default {
-    props: {
-      count: Number,
+    computed: {
+      // ...mapState(['count']),
+
+      /* count module */
+      ...mapState('count', {
+        count: (state) => state.count,
+        // count: function (state) {
+        //   return state.count;
+        // },
+      }),
     },
     methods: {
-      incrementCount() {
-        this.$emit('increment');
-      },
+      // ...mapActions(['incrementCount']),
+      // incrementCount() {
+      //   // mutation
+      //   // this.$store.commit('incrementCount');
+      //   // action -> mutation
+      //   // this.$store.dispatch('incrementCount');
+      // },
+
+      /* count module */
+      ...mapActions('count', ['incrementCount']),
     },
   };
 </script>
