@@ -8,11 +8,17 @@
 </template>
 
 <script>
-export default {
-  props: {
-    title: {
-      type: String,
+  export default {
+    props: {
+      title: {
+        type: String,
+      },
     },
-  },
-};
+    beforeDestroy() {
+      console.log('-----  beforeDestroy  -----');
+    },
+    destroyed() {
+      console.log('-----  destroyed  -----');
+    },
+  };
 </script>
